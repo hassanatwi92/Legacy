@@ -13,7 +13,7 @@
   position:fixed;
   inset:0;
   background:#000;
-  display:flex;
+  display:none; /* hide overlay by default */
   align-items:center;
   justify-content:center;
   z-index:9999;
@@ -199,20 +199,16 @@ const overlay = document.getElementById("musicOverlay");
 const btn = document.getElementById("enterBtn");
 const music = document.getElementById("bgMusic");
 
-// Check if overlay was already entered
-if(localStorage.getItem("overlayEntered")){
-  overlay.style.display = "none"; // hide overlay
-  music.play(); // play music automatically
-}
+// hide overlay by default
+overlay.style.display = "none";
 
+// Listen to click on Enter button
 btn.addEventListener("click", () => {
-  music.play();
-  localStorage.setItem("overlayEntered", "true"); // save state
-  overlay.style.display = "none";
+  music.play(); // play music
+  localStorage.setItem("musicPlayed", "true"); // remember music started
 });
 </script>
 
 
 </body>
-
 </html>
