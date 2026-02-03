@@ -7,30 +7,6 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
 
-
-<style>
-#musicOverlay{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:none; /* hide overlay by default */
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-#enterBtn{
-  font-family:'Playfair Display',serif;
-  font-size:1.5rem;
-  padding:15px 40px;
-  background:none;
-  color:#d4af37;
-  border:1px solid #d4af37;
-  cursor:pointer;
-}
-</style>+
-
-
   <style>
     body{
       margin:0;
@@ -140,14 +116,9 @@
 </head>
 <body>
 
-<div id="musicOverlay">
-  <button id="enterBtn">Enter Legacy</button>
-</div>
-
 <audio id="bgMusic">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
-
 
 <header>
   <div class="hero">
@@ -190,25 +161,25 @@
 </section>
 
 <footer>
-  © 2026 Legacy Equestrian Academy – All Rights Reserved
+  ©️ 2026 Legacy Equestrian Academy – All Rights Reserved
 </footer>
 
-
 <script>
-const overlay = document.getElementById("musicOverlay");
-const btn = document.getElementById("enterBtn");
 const music = document.getElementById("bgMusic");
 
-// hide overlay by default
-overlay.style.display = "none";
+// Play music automatically if previously started
+if(localStorage.getItem("musicPlayed")){
+  music.play();
+}
 
-// Listen to click on Enter button
-btn.addEventListener("click", () => {
-  music.play(); // play music
-  localStorage.setItem("musicPlayed", "true"); // remember music started
+// Listen to click anywhere on the page
+document.addEventListener("click", () => {
+  if(!localStorage.getItem("musicPlayed")){
+    music.play(); // play music on first click
+    localStorage.setItem("musicPlayed", "true"); // remember music started
+  }
 });
 </script>
-
 
 </body>
 </html>
