@@ -199,17 +199,20 @@ const overlay = document.getElementById("musicOverlay");
 const btn = document.getElementById("enterBtn");
 const music = document.getElementById("bgMusic");
 
-if(localStorage.getItem("musicPlayed")){
-  overlay.style.display = "none";
+// Check if overlay was already entered
+if(localStorage.getItem("overlayEntered")){
+  overlay.style.display = "none"; // hide overlay
+  music.play(); // play music automatically
 }
 
 btn.addEventListener("click", () => {
   music.play();
-  localStorage.setItem("musicPlayed", "true");
+  localStorage.setItem("overlayEntered", "true"); // save state
   overlay.style.display = "none";
 });
 </script>
 
 
 </body>
+
 </html>
