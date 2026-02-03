@@ -120,6 +120,26 @@
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<script>
+const music = document.getElementById("bgMusic");
+
+// Check if music was already started
+if(localStorage.getItem("musicPlayed")){
+  music.play().catch(() => {}); // play automatically after refresh if previously started
+}
+
+// Listen to first user interaction anywhere
+function startMusicOnce() {
+  music.play().catch(() => {}); // catch autoplay errors
+  localStorage.setItem("musicPlayed", "true"); // remember music started
+  document.removeEventListener("click", startMusicOnce);
+  document.removeEventListener("touchstart", startMusicOnce);
+}
+
+document.addEventListener("click", startMusicOnce);
+document.addEventListener("touchstart", startMusicOnce); // for mobile
+</script>
+
 <header>
   <div class="hero">
     <div>
